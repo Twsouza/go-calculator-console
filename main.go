@@ -8,10 +8,12 @@ import (
 	"regexp"
 	"runtime"
 	"strings"
+
+	"github.com/Twsouza/go-calculator-console/calculator"
 )
 
 var (
-	isOpValid = regexp.MustCompile(`[0-9+-/*^]+$`).MatchString
+	isOpValid = regexp.MustCompile(`[0-9.+-/*^]+$`).MatchString
 )
 
 func clearConsole() {
@@ -41,8 +43,11 @@ func main() {
 	}
 
 	if !isOpValid(op) {
-		log.Fatal("Operation is not valid\nValid operation include: +, -, / or *\nExample: 10+5-3/2*1")
+		log.Fatal("Operation is not valid\nValid operation include: +, -, / or *\nExample: 6+5-3/2*4")
 	}
 
-	log.Println(op)
+	calc := calculator.New()
+	result := calc.Calculate(op)
+
+	log.Println("result: ", result)
 }
